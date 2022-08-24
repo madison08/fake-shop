@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:card_swiper/card_swiper.dart';
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/widgets/carroussel_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -39,6 +41,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var _deviceHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.grey[50],
@@ -70,6 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             child: TextField(
               decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 5.0, vertical: 5.0),
                 fillColor: Colors.white,
                 filled: true,
                 hintText: "Rechercher",
@@ -89,58 +95,18 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 10.0),
-            height: 150.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(18.0),
-                gradient: LinearGradient(
-                    colors: [Color(0xFF51a3a3), Color(0xFF00d4ff)])),
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Flexible(
-                  flex: 2,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18.0),
-                        color: ColorManager.kPrimaryGradientColor,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: <Widget>[
-                            Text("Obtenir l'offre special"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+          SizedBox(
+            height: _deviceHeight * 0.2,
+            child: Swiper(
+              itemCount: 3,
+              itemBuilder: (ctx, index) {
+                return CarrousselWidget();
+              },
+              pagination: SwiperPagination(
+                builder: DotSwiperPaginationBuilder(
+                  activeColor: Colors.red,
                 ),
-                SizedBox(
-                  width: 15.0,
-                ),
-                Flexible(
-                  flex: 3,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(20.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(40.0),
-                        ),
-                        child: FlutterLogo(
-                          size: 40.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         ],
