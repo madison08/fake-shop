@@ -3,6 +3,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:fake_store_app/constants.dart';
 import 'package:fake_store_app/widgets/carroussel_widget.dart';
+import 'package:fake_store_app/widgets/product_wiget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -98,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
           SizedBox(
             height: _deviceHeight * 0.2,
             child: Swiper(
+              autoplay: true,
               itemCount: 3,
               itemBuilder: (ctx, index) {
                 return CarrousselWidget();
@@ -109,6 +111,29 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "Dernier Produits",
+                  style: TextStyle(
+                    fontSize: 15.5,
+                  ),
+                ),
+                Icon(
+                  IconlyBold.arrowRight2,
+                  color: ColorManager.kPrimaryColor,
+                  size: 35.0,
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15.0,
+          ),
+          SizedBox(width: 160.0, child: ProductWidget()),
         ],
       ),
     );
