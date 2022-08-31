@@ -37,6 +37,7 @@ dependencies:
   flutter_iconly: ^1.0.2
   card_swiper: ^2.0.4
   fancy_shimmer_image: ^2.0.2
+  page_transition: ^2.0.9
 
 dev_dependencies:
   flutter_test:
