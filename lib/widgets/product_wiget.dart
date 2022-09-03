@@ -1,4 +1,5 @@
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/screens/product_detail_screen.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -23,6 +24,14 @@ class _ProductWidgetState extends State<ProductWidget> {
       child: InkWell(
         onTap: () {
           print("hello");
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return ProductDetailScreen();
+              },
+            ),
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

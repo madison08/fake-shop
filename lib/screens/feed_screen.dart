@@ -1,9 +1,5 @@
 import 'package:fake_store_app/widgets/feed_widget.dart';
-import 'package:fake_store_app/widgets/product_wiget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 
 class FeedsScreen extends StatefulWidget {
   const FeedsScreen({Key? key}) : super(key: key);
