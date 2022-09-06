@@ -1,5 +1,6 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/screens/category_screen.dart';
 import 'package:fake_store_app/screens/feed_screen.dart';
 import 'package:fake_store_app/widgets/carroussel_widget.dart';
 import 'package:fake_store_app/widgets/feed_widget.dart';
@@ -25,9 +26,16 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: Colors.grey[50],
         elevation: 0.0,
-        leading: Icon(
-          IconlyLight.category,
-          color: ColorManager.kPrimaryColor,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return CategoryScreen();
+            }));
+          },
+          icon: Icon(
+            IconlyLight.category,
+            color: ColorManager.kPrimaryColor,
+          ),
         ),
         title: Text(
           "Acceuil",
