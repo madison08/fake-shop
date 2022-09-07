@@ -18,46 +18,58 @@ class ProductWidget extends StatelessWidget {
 
     print("PRODUCT PARSING: $product");
 
-    return Material(
-      borderRadius: BorderRadius.circular(5.0),
-      color: Colors.white,
-      child: InkWell(
-        onTap: () {
-          print("hello");
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return ProductDetailScreen();
-              },
-            ),
-          );
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Material(
+        borderRadius: BorderRadius.circular(5.0),
+        color: Colors.white,
+        child: InkWell(
+          onTap: () {
+            print("hello");
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return ProductDetailScreen();
+                },
+              ),
+            );
+          },
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text("1000 F"),
+                  Text("\$ ${product!.price.toString()}"),
                   Icon(
                     IconlyBold.heart,
                     color: ColorManager.kPrimaryColor,
                   ),
                 ],
               ),
-              FancyShimmerImage(
-                height: _deviceHeight * 0.2,
-                width: double.infinity,
-                errorWidget: Icon(
-                  IconlyBold.danger,
-                ),
-                imageUrl: product!.images![0].toString(),
-                boxFit: BoxFit.fill,
+              SizedBox(
+                height: 7.0,
               ),
-              Text("Tilte"),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: FancyShimmerImage(
+                  height: _deviceHeight * 0.2,
+                  width: double.infinity,
+                  errorWidget: Icon(
+                    IconlyBold.danger,
+                  ),
+                  imageUrl: product!.images![0].toString(),
+                  boxFit: BoxFit.fill,
+                ),
+              ),
+              SizedBox(
+                height: 7.0,
+              ),
+              Text(
+                product!.title.toString(),
+              ),
             ],
           ),
         ),
