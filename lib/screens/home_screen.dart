@@ -1,8 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/models/Product.dart';
+import 'package:fake_store_app/models/dataProvider.dart';
 import 'package:fake_store_app/screens/category_screen.dart';
 import 'package:fake_store_app/screens/feed_screen.dart';
 import 'package:fake_store_app/screens/users_screen.dart';
+import 'package:fake_store_app/services/api_handler.dart';
 import 'package:fake_store_app/widgets/carroussel_widget.dart';
 import 'package:fake_store_app/widgets/feed_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -19,6 +23,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var _deviceHeight = MediaQuery.of(context).size.height;
@@ -164,7 +174,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   SizedBox(
                     height: 15.0,
                   ),
-                  FeedsWidget()
+                  FutureBuilder<dynamic>(
+                    future: Provider.of<DataProvider>(context, listen: false)
+                        .getAllProducts(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      print("future builder data: ${snapshot.data}");
+
+                      List<Product>? products = snapshot.data;
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(child: CircularProgressIndicator());
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Text("Quelque chose s'est mal passer");
+                        } else if (snapshot.hasData) {
+                          return FeedsWidget(
+                            products: snapshot.data!,
+                          );
+                        } else {
+                          return Text("Pas de produit");
+                        }
+                      } else {
+                        return Text("Une erreur s'est produite");
+                      }
+                    },
+                  ),
                 ],
               ),
             ),

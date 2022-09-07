@@ -1,4 +1,5 @@
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/models/Product.dart';
 import 'package:fake_store_app/screens/product_detail_screen.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -6,17 +7,16 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
-class ProductWidget extends StatefulWidget {
-  const ProductWidget({Key? key}) : super(key: key);
+class ProductWidget extends StatelessWidget {
+  Product? product;
 
-  @override
-  State<ProductWidget> createState() => _ProductWidgetState();
-}
+  ProductWidget({required this.product});
 
-class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     var _deviceHeight = MediaQuery.of(context).size.height;
+
+    print("PRODUCT PARSING: $product");
 
     return Material(
       borderRadius: BorderRadius.circular(5.0),
@@ -54,7 +54,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                 errorWidget: Icon(
                   IconlyBold.danger,
                 ),
-                imageUrl: "https://i.ibb.co/Z8yxGBF/shoes-17841.png",
+                imageUrl: product!.images![0].toString(),
                 boxFit: BoxFit.fill,
               ),
               Text("Tilte"),
