@@ -11,5 +11,9 @@ String imageChecker(imgUrl) {
     return "https://via.placeholder.com/150";
   }
 
+  if (!imgUrl.contains("http")) {
+    return "https://via.placeholder.com/150";
+  }
+
   return imgUrl;
 }
