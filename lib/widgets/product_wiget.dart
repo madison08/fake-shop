@@ -1,6 +1,7 @@
 import 'package:fake_store_app/constants.dart';
 import 'package:fake_store_app/models/Product.dart';
 import 'package:fake_store_app/screens/product_detail_screen.dart';
+import 'package:fake_store_app/utils.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -60,9 +61,8 @@ class ProductWidget extends StatelessWidget {
                   errorWidget: Icon(
                     IconlyBold.danger,
                   ),
-                  imageUrl: product!.images![0] == ""
-                      ? "https://via.placeholder.com/150"
-                      : product!.images![0],
+                  imageUrl: imageChecker(product!.images![0]),
+                  //product!.images![0] == ""? "https://via.placeholder.com/150": product!.images![0],
                   boxFit: BoxFit.fill,
                 ),
               ),
