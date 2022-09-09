@@ -1,9 +1,12 @@
 import 'package:fake_store_app/constants.dart';
+import 'package:fake_store_app/models/User.dart';
+import 'package:fake_store_app/models/dataProvider.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 class UserScreen extends StatefulWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -32,30 +35,51 @@ class _UserScreenState extends State<UserScreen> {
           ),
         ),
       ),
-      body: ListView.builder(
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: FancyShimmerImage(
-                height: 50.0,
-                width: 50.0,
-                errorWidget: Icon(
-                  IconlyBold.danger,
-                ),
-                imageUrl: "https://i.ibb.co/vLBDKCM/DIMd-JND1-400x400.jpg",
-                boxFit: BoxFit.fill,
-              ),
-              title: Text("Quincy Larsson"),
-              subtitle: Text("devdev@gmail.com"),
-              trailing: Text(
-                "admin",
-                style: TextStyle(
-                  color: ColorManager.kPrimaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            );
-          }),
+      body: FutureBuilder<dynamic>(
+        future: Provider.of<DataProvider>(context, listen: false).getAllUser(),
+        builder: (context, AsyncSnapshot snapshot) {
+          print("future builder data: ${snapshot.data}");
+
+          List<User>? users = snapshot.data;
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Text("Quelque chose s'est mal passer");
+            } else if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: users!.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      leading: FancyShimmerImage(
+                        height: 50.0,
+                        width: 50.0,
+                        errorWidget: Icon(
+                          IconlyBold.danger,
+                        ),
+                        imageUrl: users[index].avatar.toString(),
+                        boxFit: BoxFit.fill,
+                      ),
+                      title: Text(users[index].name.toString()),
+                      subtitle: Text(users[index].email.toString()),
+                      trailing: Text(
+                        users[index].role.toString(),
+                        style: TextStyle(
+                          color: ColorManager.kPrimaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    );
+                  });
+            } else {
+              return Text("Pas d'utilisateur");
+            }
+          } else {
+            return Text("Une erreur s'est produite");
+          }
+        },
+      ),
     );
   }
 }

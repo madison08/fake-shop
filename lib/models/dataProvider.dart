@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fake_store_app/models/Category.dart';
 import 'package:fake_store_app/models/Product.dart';
+import 'package:fake_store_app/models/User.dart';
 import 'package:fake_store_app/services/api_consts.dart';
 import 'package:http/http.dart' as http;
 
@@ -11,6 +12,7 @@ import 'package:flutter/widgets.dart';
 class DataProvider with ChangeNotifier {
   List<Product>? _products = [];
   List<Category>? _categories = [];
+  List<User>? _users = [];
 
   get allProducts {
     return _products;
@@ -18,6 +20,10 @@ class DataProvider with ChangeNotifier {
 
   get allCategory {
     return _categories;
+  }
+
+  get allUsers {
+    return _users;
   }
 
   Future<List<Product>?> getAllProducts() async {
@@ -58,5 +64,25 @@ class DataProvider with ChangeNotifier {
     notifyListeners();
 
     return _categories;
+  }
+
+  Future<List<User>?> getAllUser() async {
+    var response = await http.get(Uri.parse("$BASE_URL/api/v1/users"));
+
+    var data = jsonDecode(response.body);
+
+    print("DATA: $data");
+
+    List<User>? loadedUser = [];
+
+    for (var user in data) {
+      loadedUser.add(User.fromJson(user));
+    }
+
+    _users = loadedUser;
+
+    notifyListeners();
+
+    return _users;
   }
 }
