@@ -31,7 +31,9 @@ class ProductWidget extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) {
-                  return ProductDetailScreen();
+                  return ProductDetailScreen(
+                    productID: product!.id,
+                  );
                 },
               ),
             );

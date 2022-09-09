@@ -46,6 +46,20 @@ class DataProvider with ChangeNotifier {
     return _products;
   }
 
+  Future<Product>? getSingleProduct(productID) async {
+    var response =
+        await http.get(Uri.parse("$BASE_URL/api/v1/products/$productID"));
+
+    var data = jsonDecode(response.body);
+
+    Product dataReturn = Product.fromJson(data);
+
+    print("DATAL: $data");
+    print("DATAL RETURN: $dataReturn");
+
+    return dataReturn;
+  }
+
   Future<List<Category>?> getAllCategories() async {
     var response = await http.get(Uri.parse("$BASE_URL/api/v1/categories"));
 
