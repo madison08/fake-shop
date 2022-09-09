@@ -46,17 +46,19 @@ class CategoryScreen extends StatelessWidget {
                 // physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 7.0,
+                  mainAxisSpacing: 2.0,
                   crossAxisSpacing: 7.0,
-                  childAspectRatio: 0.8,
+                  childAspectRatio: 1.1,
                 ),
-                itemCount: 10,
+                itemCount: categories!.length,
                 itemBuilder: (ctx, index) {
-                  return CategoryWidget();
+                  return CategoryWidget(
+                    category: categories[index],
+                  );
                 },
               );
             } else {
-              return Text("Pas de produit");
+              return Text("Pas de categorie");
             }
           } else {
             return Text("Une erreur s'est produite");

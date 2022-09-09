@@ -20,7 +20,7 @@ class ProductWidget extends StatelessWidget {
     print("PRODUCT PARSING: $product");
 
     return Padding(
-      padding: const EdgeInsets.all(2.0),
+      padding: const EdgeInsets.all(8.0),
       child: Material(
         borderRadius: BorderRadius.circular(5.0),
         color: Colors.white,

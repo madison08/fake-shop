@@ -22,9 +22,9 @@ class _FeedsWidgetState extends State<FeedsWidget> {
         physics: NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          mainAxisSpacing: 5.0,
-          crossAxisSpacing: 3.0,
-          childAspectRatio: 0.8,
+          mainAxisSpacing: 0.0,
+          crossAxisSpacing: 0.0,
+          childAspectRatio: 0.75,
         ),
         itemCount: widget.products!.length,
         itemBuilder: (ctx, index) {
