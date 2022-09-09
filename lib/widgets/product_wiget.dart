@@ -60,7 +60,9 @@ class ProductWidget extends StatelessWidget {
                   errorWidget: Icon(
                     IconlyBold.danger,
                   ),
-                  imageUrl: product!.images![0].toString(),
+                  imageUrl: product!.images![0] == ""
+                      ? "https://via.placeholder.com/150"
+                      : product!.images![0],
                   boxFit: BoxFit.fill,
                 ),
               ),
