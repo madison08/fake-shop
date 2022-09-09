@@ -6,7 +6,7 @@ class Product {
   num? price;
   String? description;
   Category? category;
-  List<String>? images;
+  List<dynamic>? images;
 
   Product(
       {this.id,
@@ -23,7 +23,7 @@ class Product {
     description = json['description'];
     category =
         json['category'] != null ? Category.fromJson(json['category']) : null;
-    images = json['images'].cast<String>();
+    images = json['images'] ?? ["https://via.placeholder.com/150"];
   }
 
   // Map<String, dynamic> toJson() {
