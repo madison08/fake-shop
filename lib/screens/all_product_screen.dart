@@ -46,11 +46,15 @@ class _FeedsScreenState extends State<FeedsScreen> {
     _scrollController.addListener(() async {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-        _isLimit = true;
         limit = limit + 10;
+
+        if (limit == 200) {
+          _isLimit = true;
+          setState(() {});
+          return;
+        }
         log("limit $limit");
         await getAllproducts();
-        _isLoading = false;
       }
     });
   }
@@ -82,22 +86,34 @@ class _FeedsScreenState extends State<FeedsScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          : GridView.builder(
+          : SingleChildScrollView(
               controller: _scrollController,
-              // shrinkWrap: true,
-              // physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 0.0,
-                crossAxisSpacing: 0.0,
-                childAspectRatio: 0.75,
+              child: Column(
+                children: [
+                  GridView.builder(
+                      // controller: _scrollController,
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 0.0,
+                        crossAxisSpacing: 0.0,
+                        childAspectRatio: 0.75,
+                      ),
+                      itemCount: listProducts!.length,
+                      itemBuilder: (ctx, index) {
+                        return ProductWidget(
+                          product: listProducts![index],
+                        );
+                      }),
+                  !_isLimit
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Container(),
+                ],
               ),
-              itemCount: listProducts!.length,
-              itemBuilder: (ctx, index) {
-                return ProductWidget(
-                  product: listProducts![index],
-                );
-              }),
+            ),
     );
   }
 }
