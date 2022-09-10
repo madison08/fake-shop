@@ -67,7 +67,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      "Category",
+                      product!.category!.name.toString(),
                       style: TextStyle(fontSize: 17.0),
                     ),
                     SizedBox(

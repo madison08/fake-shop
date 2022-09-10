@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:fake_store_app/models/Category.dart';
 import 'package:fake_store_app/models/Product.dart';
@@ -27,23 +28,32 @@ class DataProvider with ChangeNotifier {
   }
 
   Future<List<Product>?> getAllProducts() async {
-    var response = await http.get(Uri.parse("$BASE_URL/api/v1/products"));
+    try {
+      var response = await http.get(Uri.parse("$BASE_URL/api/v1/products"));
 
-    var data = jsonDecode(response.body);
+      var data = jsonDecode(response.body);
 
-    print("DATA: $data");
+      print("DATA: $data");
 
-    List<Product>? loadedProduct = [];
+      List<Product>? loadedProduct = [];
 
-    for (var product in data) {
-      loadedProduct.add(Product.fromJson(product));
+      if (response.statusCode != 200) {
+        throw data["message"];
+      }
+
+      for (var product in data) {
+        loadedProduct.add(Product.fromJson(product));
+      }
+
+      _products = loadedProduct;
+
+      notifyListeners();
+
+      return _products;
+    } catch (err) {
+      log("Erreur a la recuperation de produits $err");
+      throw err.toString();
     }
-
-    _products = loadedProduct;
-
-    notifyListeners();
-
-    return _products;
   }
 
   Future<Product>? getSingleProduct(productID) async {
