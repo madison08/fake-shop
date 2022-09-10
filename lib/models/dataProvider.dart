@@ -27,9 +27,15 @@ class DataProvider with ChangeNotifier {
     return _users;
   }
 
-  Future<List<Product>?> getAllProducts() async {
+  Future<List<Product>?> getAllProducts({limit = 5}) async {
     try {
-      var response = await http.get(Uri.parse("$BASE_URL/api/v1/products"));
+      // final uri = Uri.https(BASE_URL, "/api/v1/products",  );
+
+      int offset = 0;
+      // int limit = 0;
+
+      var response = await http.get(
+          Uri.parse("$BASE_URL/api/v1/products?offset=$offset&limit=$limit"));
 
       var data = jsonDecode(response.body);
 

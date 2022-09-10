@@ -3,7 +3,7 @@ import 'package:fake_store_app/constants.dart';
 import 'package:fake_store_app/models/Product.dart';
 import 'package:fake_store_app/models/dataProvider.dart';
 import 'package:fake_store_app/screens/category_screen.dart';
-import 'package:fake_store_app/screens/feed_screen.dart';
+import 'package:fake_store_app/screens/all_product_screen.dart';
 import 'package:fake_store_app/screens/users_screen.dart';
 import 'package:fake_store_app/services/api_handler.dart';
 import 'package:fake_store_app/widgets/carroussel_widget.dart';
