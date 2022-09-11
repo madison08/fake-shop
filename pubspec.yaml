@@ -39,6 +39,15 @@ dependencies:
   fancy_shimmer_image: ^2.0.2
   page_transition: ^2.0.9
   provider: ^6.0.3
+  flutter_native_splash: ^2.2.9
+
+flutter_native_splash:
+  color_dark: "#ffffff"
+  color: "#ffffff"
+  image_dark: assets/images/store_icon.png
+  image: assets/images/store_icon.png
+  android_gravity: center
+
 
 dev_dependencies:
   flutter_test:
