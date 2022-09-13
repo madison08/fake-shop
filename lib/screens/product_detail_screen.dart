@@ -51,10 +51,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ),
         backgroundColor: Colors.white,
         elevation: 0.0,
-        title: Text(
-          "product detail",
-          style: TextStyle(color: Colors.black),
-        ),
+        // title: Text(
+        //   "product detail",
+        //   style: TextStyle(color: Colors.black),
+        // ),
       ),
       body: product == null
           ? Center(

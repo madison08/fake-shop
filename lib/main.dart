@@ -3,6 +3,7 @@ import 'package:fake_store_app/models/dataProvider.dart';
 import 'package:fake_store_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-          // primarySwatch: Colors.blue,
-          ),
+        textTheme: GoogleFonts.abelTextTheme(),
+        // primarySwatch: Colors.blue,
+      ),
       home: HomeScreen(),
     );
   }

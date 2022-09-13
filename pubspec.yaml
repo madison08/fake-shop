@@ -40,6 +40,7 @@ dependencies:
   page_transition: ^2.0.9
   provider: ^6.0.3
   flutter_native_splash: ^2.2.9
+  google_fonts: ^3.0.1
 
 flutter_native_splash:
   color_dark: "#ffffff"
