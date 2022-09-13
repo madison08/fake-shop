@@ -1,6 +1,11 @@
 # fake_store_app
 
-A new Flutter project.
+A fake store app.
+
+![alt text](screenshort/image1.png)
+![alt text](screenshort/image2.png)
+![alt text](screenshort/image3.png)
+![alt text](screenshort/image4.png)
 
 ## Getting Started
 
